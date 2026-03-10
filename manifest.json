@@ -1,0 +1,22 @@
+{
+  "name": "Facebook Npc Marker",
+  "version": "0.1",
+  "manifest_version": 3,
+  "description": "Highlights identified troll profiles' comments on Facebook",
+  "icons": {
+    "48": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://facebook.com/**","https://www.facebook.com/**","https://www.facebook.com/"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/profiles.json", "assets/npc.png"],
+      "matches": ["https://facebook.com/*", "https://www.facebook.com/*"]
+    }
+  ]
+}
