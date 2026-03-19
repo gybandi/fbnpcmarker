@@ -18,7 +18,7 @@ public class TelexDataScraper implements DataScraper {
             "https://telex.hu/techtud/2026/03/09/mutatjuk-a-fideszes-kamuprofil-halozat-mind-az-1198-tagjat",
             "https://telex.hu/techtud/2026/03/19/mutatjuk-a-fideszes-politikusok-marcius-15-i-ukran-zaszlos-posztjait-lajkokkal-kihangosito-1954-kamuprofilt"
     };
-    private static final String FACEBOOK_URL_BASE = "https://www.facebook.com/";
+    private static final String FACEBOOK_URL_BASE = "https://www.facebook.com/profile.php?id=";
     private static final Logger LOGGER = LoggerFactory.getLogger(TelexDataScraper.class);
 
     private final JsoupFetcher jsoupFetcher;
