@@ -32,7 +32,6 @@ async function loadProfiles() {
         const data = await response.json();
 
         highlightedProfiles = new Set(data.map(profile => profile.profileUri));
-        console.log("Loaded highlighted profiles:", highlightedProfiles);
     } catch (error) {
         console.error("Error loading profiles from the static file:", error);
     }
@@ -139,10 +138,72 @@ function highlightFollowers(root = document){
     );
 }
 
+function highlightReactions(root = document){
+    const reactionElements = getElementsByXPath('//div[@role="dialog"]//a[contains(@href, "facebook.com")]/parent::span/parent::div/parent::span/parent::div/parent::div/parent::div/parent::div/parent::div',
+                                                document);
+   reactionElements.forEach(el => {
+        const profileLink = el.querySelector('a'); // Assuming the profile link is in an <a> tag
+        const profileIdMatch = profileLink ? profileLink.href.match(/profile.php\?id=(\d+)/) : null;
+        const vanityMatch = profileLink ? profileLink.href.match(/facebook\.com\/([^\/?]+)/) : null;
+
+        let profileIdentifier = null;
+
+        if (profileIdMatch) {
+            profileIdentifier = profileIdMatch[1];
+        }
+
+        else if (vanityMatch) {
+            profileIdentifier = vanityMatch[1];
+        }
+
+        if (profileIdentifier && highlightedProfiles.has(profileIdentifier)) {
+            if (!el.classList.contains('comment-highlighted')) {
+                el.style.backgroundColor = 'rgba(255, 137, 0, 0.6)';
+                el.style.border = '2px solid orange';
+                el.style.borderRadius = '6px';
+                el.style.padding = '4px';
+                el.classList.add('comment-highlighted');  // Mark as processed
+				// Create icon
+				const icon = document.createElement("img");
+				icon.src = chrome.runtime.getURL(ICON_LOCATION);
+
+				icon.style.position = "absolute";
+				icon.style.top = "15%";
+				icon.style.right = "25%";
+				icon.style.width = "34px";
+				icon.style.height = "40px";
+				icon.style.opacity = "0.9";
+				icon.style.pointerEvents = "none"; // prevents click interference
+
+				// Ensure container can anchor absolute children
+				el.style.position = "relative";
+
+				el.appendChild(icon);
+         }
+     }
+    }
+    );
+}
+
+// ===============================
+// XPATH HELPER
+// ===============================
+
+function getElementsByXPath(xpath, parent)
+{
+    let results = [];
+    let query = document.evaluate(xpath, parent || document,
+        null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+    for (let i = 0, length = query.snapshotLength; i < length; ++i) {
+        results.push(query.snapshotItem(i));
+    }
+    return results;
+}
 
 function initialScan() {
     highlightComments();
     highlightFollowers();
+    highlightReactions();
 }
 
 // ===============================
@@ -155,6 +216,7 @@ const observer = new MutationObserver(mutations => {
             if (node.nodeType === 1) { 
                 highlightComments(node);
                 highlightFollowers(node);
+                highlightReactions(node);
             }
         });
     });
