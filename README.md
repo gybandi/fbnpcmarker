@@ -5,3 +5,13 @@ Chrome plugin that marks identified troll profiles' activity on Facebook.
 The plugin gets the profile ids from the `assets/profiles.json`.
 The initial dataset is fetched from publicly available article by [Telex](https://telex.hu/techtud/2026/03/09/mutatjuk-a-fideszes-kamuprofil-halozat-mind-az-1198-tagjat)
 
+# Installation
+
+## Install from Chrome Plugin store
+
+Easiest way to install is to use Chrome's Web Store, located [here](https://chromewebstore.google.com/detail/facebook-npc-marker/fekdebmoeljibibofalgkfghmbjipnif).  The newest version of the application might be published later here, due to the lengthy review process.
+
+## Install manually
+
+Alternatively, you can install the latest version by downloading the zip file in releases, unpacking it and using your loading the unpacked plugin while the developer mode is enabled in your Chrome's extension page.
+![Chrome Extension developer mode](docs/installation_guide.png)
