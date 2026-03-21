@@ -13,5 +13,6 @@ Easiest way to install is to use Chrome's Web Store, located [here](https://chro
 
 ## Install manually
 
-Alternatively, you can install the latest version by downloading the zip file in releases, unpacking it and using your loading the unpacked plugin while the developer mode is enabled in your Chrome's extension page.
+Alternatively, you can install the latest version by downloading the zip file in releases, unpacking it and loading the unpacked plugin while the developer mode is enabled in your Chrome's extension page.
 ![Chrome Extension developer mode](docs/installation_guide.png)
+Here, the unpacked folder with the content.js and manifest.json must be selected.
