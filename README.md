@@ -3,11 +3,14 @@ Chrome plugin that marks identified troll profiles' activity on Facebook.
 
 # Screenshots
 Comments marking
+
 ![Facebook NPC Marker 1](docs/fbnpcmarker.png)
 Followers marking
+
 ![Facebook NPC Marker 2](docs/fbnpcmarker1.png)
 ![Facebook NPC Marker 3](docs/fbnpcmarker2.png)
 Reactions marking
+
 ![Facebook NPC Marker 4](docs/fbnpcmarker3.png)
 
 # Assets
