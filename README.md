@@ -1,9 +1,20 @@
 # Facebook NPC Marker
 Chrome plugin that marks identified troll profiles' activity on Facebook.
 
+# Screenshots
+Comments marking
+![Facebook NPC Marker 1](docs/fbnpcmarker.png)
+Followers marking
+![Facebook NPC Marker 2](docs/fbnpcmarker1.png)
+![Facebook NPC Marker 3](docs/fbnpcmarker2.png)
+Reactions marking
+![Facebook NPC Marker 4](docs/fbnpcmarker3.png)
+
 # Assets
 The plugin gets the profile ids from the `assets/profiles.json`.
-The initial dataset is fetched from publicly available article by [Telex](https://telex.hu/techtud/2026/03/09/mutatjuk-a-fideszes-kamuprofil-halozat-mind-az-1198-tagjat)
+The initial dataset is fetched from publicly available articles by [Telex](https://telex.hu/techtud/2026/03/09/mutatjuk-a-fideszes-kamuprofil-halozat-mind-az-1198-tagjat)
+
+New 0.3 version also includes updated datasource based on recent [article](https://telex.hu/techtud/2026/03/19/mutatjuk-a-fideszes-politikusok-marcius-15-i-ukran-zaszlos-posztjait-lajkokkal-kihangosito-1954-kamuprofilt)
 
 # Installation
 
