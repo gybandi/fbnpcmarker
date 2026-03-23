@@ -23,6 +23,7 @@ public class DataScraperRunner {
     public void runScraper() {
         List<ScrapedData> result = scrapers.stream()
                 .flatMap(scraper -> scraper.scrapeData().stream())
+                .sorted()
                 .map(profileId -> new ScrapedData(profileId))
                 .distinct()
                 .toList();
