@@ -10,29 +10,31 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
-public class TelexDataScraper implements DataScraper {
+public class TelexUrlDataScraper implements DataScraper {
     private static final String[] TELEX_DATASOURCE_URLS = {
             "https://telex.hu/techtud/2026/03/09/mutatjuk-a-fideszes-kamuprofil-halozat-mind-az-1198-tagjat",
             "https://telex.hu/techtud/2026/03/19/mutatjuk-a-fideszes-politikusok-marcius-15-i-ukran-zaszlos-posztjait-lajkokkal-kihangosito-1954-kamuprofilt"
     };
     private static final String FACEBOOK_URL_BASE = "https://www.facebook.com/profile.php?id=";
-    private static final Logger LOGGER = LoggerFactory.getLogger(TelexDataScraper.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TelexUrlDataScraper.class);
 
     private final JsoupFetcher jsoupFetcher;
 
-    public TelexDataScraper(JsoupFetcher jsoupFetcher) {
+    public TelexUrlDataScraper(JsoupFetcher jsoupFetcher) {
         this.jsoupFetcher = jsoupFetcher;
     }
 
     public List<String> scrapeData() {
-        List<String> result = new ArrayList<>();
+        Set<String> result = new HashSet<>();
         for (String url : TELEX_DATASOURCE_URLS) {
             result.addAll(scrapeData(url));
         }
-        return result;
+        return result.stream().sorted().toList();
     }
 
     private List<String> scrapeData(String url) {

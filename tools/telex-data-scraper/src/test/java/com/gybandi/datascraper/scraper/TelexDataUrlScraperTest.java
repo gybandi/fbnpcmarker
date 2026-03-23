@@ -13,15 +13,15 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
-class TelexDataScraperTest {
+class TelexDataUrlScraperTest {
 
     private JsoupFetcher jsoupFetcher;
-    private TelexDataScraper scraper;
+    private TelexUrlDataScraper scraper;
 
     @BeforeEach
     void setup() {
         jsoupFetcher = mock(JsoupFetcher.class);
-        scraper = new TelexDataScraper(jsoupFetcher);
+        scraper = new TelexUrlDataScraper(jsoupFetcher);
     }
 
     @Test
@@ -53,10 +53,8 @@ class TelexDataScraperTest {
         // then
         assertThat(result)
                 .containsExactly(
-                        "profile.php?id=123",
-                        "profile.php?id=456",
-                        "profile.php?id=123",
-                        "profile.php?id=456"
+                        "123",
+                        "456"
                 );
 
         // verify both URLs were called
