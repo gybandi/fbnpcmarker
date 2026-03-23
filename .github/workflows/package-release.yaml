@@ -32,7 +32,7 @@ jobs:
       - name: Run packaging script
         run: |
           chmod +x ./package.sh
-          ./scripts/package.sh "$VERSION"
+          ./package.sh "$VERSION"
 
       - name: Create Git tag
         run: |
@@ -54,7 +54,7 @@ jobs:
       - name: Set new version
         run: |
           chmod +x ./set-version.sh
-          ./scripts/set-version.sh "NEW_VERSION"
+          ./set-version.sh "NEW_VERSION"
 
       - name: Commit release version
         run: |
