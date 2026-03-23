@@ -1,6 +1,6 @@
 {
   "name": "Facebook Npc Marker",
-  "version": "NEW_VERSION",
+  "version": "0.0.4",
   "manifest_version": 3,
   "description": "Highlights identified troll profiles' comments, reactions on Facebook. Also marks profiles on Followers page.",
   "icons": {
