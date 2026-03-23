@@ -3,7 +3,7 @@
 # Files and directory to compress
 DIR_TO_ZIP="assets"
 FILES_TO_ZIP=("manifest.json" "content.js" "icon.png")
-OUTPUT_ZIP="build/fbnpcmarker.zip"
+OUTPUT_ZIP="build/fbnpcmarker-$1.zip"
 
 # Create dir
 mkdir -p build
