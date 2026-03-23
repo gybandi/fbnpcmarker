@@ -25,10 +25,12 @@ jobs:
           cache: maven
 
       - name: Build project
-        run: ./tools/telex-data-scraper/mvnw clean install -DskipTests
+        run: ./mvnw clean install -DskipTests
+        working-directory: tools/telex-data-scraper
 
       - name: Run Data scraper tool
-        run: ./tools/telex-data-scraper/mvnw spring-boot:run
+        run: ./mvnw spring-boot:run
+        working-directory: tools/telex-data-scraper
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
