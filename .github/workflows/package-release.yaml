@@ -40,8 +40,13 @@ jobs:
           git config user.email "github-actions@github.com"
 
           git add -A
-          git commit -m "Updated version ${NEW_VERSION}"
-          git push origin HEAD:main
+          
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Updated version ${NEW_VERSION}"
+            git push origin HEAD:main
+          fi
 
 
       - name: Run packaging script
