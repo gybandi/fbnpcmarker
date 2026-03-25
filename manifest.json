@@ -6,6 +6,9 @@
   "icons": {
     "48": "icon.png"
   },
+  "action": {
+    "default_popup": "popup.html"
+  },
   "content_scripts": [
     {
       "matches": [
@@ -14,15 +17,16 @@
         "https://www.facebook.com/"
       ],
       "js": [
-        "content.js"
+        "sources.js" ,"content.js"
       ],
       "run_at": "document_idle"
     }
   ],
+  "permissions": ["storage"],
   "web_accessible_resources": [
     {
       "resources": [
-        "assets/profiles.json",
+        "assets/datasources/telex/profiles.json",
         "assets/npc.png"
       ],
       "matches": [

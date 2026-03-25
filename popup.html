@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+          font-family: Arial;
+          padding: 10px;
+          min-width: 220px;
+        }
+
+        .item {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 8px;
+          align-items: center;
+        }
+
+        .title {
+          font-size: 14px;
+        }
+
+        input[type="checkbox"] {
+          transform: scale(1.2);
+        }
+
+        .icon {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+    </style>
+</head>
+<body>
+
+<h3>Data Sources</h3>
+<div id="list"></div>
+
+<script src="sources.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>

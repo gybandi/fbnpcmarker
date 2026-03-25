@@ -2,12 +2,24 @@
 // INIT
 // ===============================
 
-const PROFILE_LOCATION='assets/profiles.json'
 const REFRESH_INTERVAL = 600000; // 10 minutes
 const ICON_LOCATION = 'assets/npc.png'
 
+let dataSources = {};
+let enabledSources = {};
+
+chrome.runtime.onMessage.addListener((msg) => {
+    if (msg.type === "TOGGLE_SOURCE") {
+        enabledSources[msg.key] = msg.value;
+
+        clearHighlights();
+        initialScan();
+    }
+});
+
 async function init() {
     await loadProfiles();
+    await loadEnabledSources();
 
     initialScan();
 
@@ -26,15 +38,29 @@ async function init() {
 let highlightedProfiles = new Set();
 
 async function loadProfiles() {
-    try {
-        const fileUrl = chrome.runtime.getURL(PROFILE_LOCATION); 
-        const response = await fetch(fileUrl);
-        const data = await response.json();
+    for (const [key, source] of Object.entries(DATA_SOURCES)) {
+        const fileUrl = chrome.runtime.getURL(source.path);
+        console.log("-------------");
+        console.log(key);
+        console.log(source);
+        console.log(fileUrl);
+        console.log("-------------");
+        const res = await fetch(fileUrl);
+        const data = await res.json();
 
-        highlightedProfiles = new Set(data.map(profile => profile.profileUri));
-    } catch (error) {
-        console.error("Error loading profiles from the static file:", error);
+        dataSources[key] = new Set(data.map(p => p.profileUri));
     }
+}
+
+function loadEnabledSources() {
+    return new Promise(resolve => {
+        chrome.storage.local.get(Object.keys(DATA_SOURCES), result => {
+            Object.keys(DATA_SOURCES).forEach(key => {
+                enabledSources[key] = result[key] ?? true;
+            });
+            resolve();
+        });
+    });
 }
 
 // ===============================
@@ -63,7 +89,7 @@ function highlightComments(root = document) {
             profileIdentifier = vanityMatch[1];
         }
 
-        if (profileIdentifier && highlightedProfiles.has(profileIdentifier)) {
+        if (profileIdentifier && isProfileHighlighted(profileIdentifier)) {
             if (!el.classList.contains('comment-highlighted')) {
                 el.style.backgroundColor = 'rgba(255, 137, 0, 0.6)';
                 el.style.border = '2px solid orange';
@@ -73,6 +99,7 @@ function highlightComments(root = document) {
 				// Create icon
 				const icon = document.createElement("img");
 				icon.src = chrome.runtime.getURL(ICON_LOCATION);
+				icon.classList.add("npc-icon");
 
 				icon.style.position = "absolute";
 				icon.style.top = "4px";
@@ -89,6 +116,13 @@ function highlightComments(root = document) {
          }
     }
     });
+}
+
+function isProfileHighlighted(profileIdentifier) {
+    return Object.keys(dataSources).some(key =>
+        enabledSources[key] &&
+        dataSources[key]?.has(profileIdentifier)
+    );
 }
 
 function highlightFollowers(root = document){
@@ -108,8 +142,7 @@ function highlightFollowers(root = document){
         else if (vanityMatch) {
             profileIdentifier = vanityMatch[1];
         }
-
-        if (profileIdentifier && highlightedProfiles.has(profileIdentifier)) {
+        if (profileIdentifier && isProfileHighlighted(profileIdentifier)) {
             if (!el.classList.contains('comment-highlighted')) {
                 el.style.backgroundColor = 'rgba(255, 137, 0, 0.6)';
                 el.style.border = '2px solid orange';
@@ -119,6 +152,7 @@ function highlightFollowers(root = document){
 				// Create icon
 				const icon = document.createElement("img");
 				icon.src = chrome.runtime.getURL(ICON_LOCATION);
+				icon.classList.add("npc-icon");
 
 				icon.style.position = "absolute";
 				icon.style.top = "20%";
@@ -156,7 +190,7 @@ function highlightReactions(root = document){
             profileIdentifier = vanityMatch[1];
         }
 
-        if (profileIdentifier && highlightedProfiles.has(profileIdentifier)) {
+        if (profileIdentifier && isProfileHighlighted(profileIdentifier)) {
             if (!el.classList.contains('comment-highlighted')) {
                 el.style.backgroundColor = 'rgba(255, 137, 0, 0.6)';
                 el.style.border = '2px solid orange';
@@ -166,6 +200,7 @@ function highlightReactions(root = document){
 				// Create icon
 				const icon = document.createElement("img");
 				icon.src = chrome.runtime.getURL(ICON_LOCATION);
+				icon.classList.add("npc-icon");
 
 				icon.style.position = "absolute";
 				icon.style.top = "15%";
@@ -178,7 +213,9 @@ function highlightReactions(root = document){
 				// Ensure container can anchor absolute children
 				el.style.position = "relative";
 
-				el.appendChild(icon);
+				if (!el.querySelector('.npc-icon')) {
+                    el.appendChild(icon);
+                }
          }
      }
     }
@@ -221,6 +258,16 @@ const observer = new MutationObserver(mutations => {
         });
     });
 });
+
+function clearHighlights() {
+    document.querySelectorAll('.comment-highlighted').forEach(el => {
+        el.style = "";
+        el.classList.remove('comment-highlighted');
+        // remove injected icons
+        const icons = el.querySelectorAll('.npc-icon');
+        icons.forEach(icon => icon.remove());
+    });
+}
 
 // ===============================
 // PROFILE REFRESH

@@ -2,7 +2,7 @@
 
 # Files and directory to compress
 DIR_TO_ZIP="assets"
-FILES_TO_ZIP=("manifest.json" "content.js" "icon.png")
+FILES_TO_ZIP=("manifest.json")
 OUTPUT_ZIP="build/fbnpcmarker-$1.zip"
 
 # Create dir
