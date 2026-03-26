@@ -21,6 +21,8 @@ New 0.3 version also includes updated datasource based on recent [article](https
 
 # Installation
 
+The plugin can be installed in two ways:
+
 ## Install from Chrome Plugin store
 
 Easiest way to install is to use Chrome's Web Store, located [here](https://chromewebstore.google.com/detail/facebook-npc-marker/fekdebmoeljibibofalgkfghmbjipnif).  The newest version of the application might be published later here, due to the lengthy review process.
