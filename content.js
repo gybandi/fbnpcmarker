@@ -40,12 +40,8 @@ let highlightedProfiles = new Set();
 async function loadProfiles() {
     for (const [key, source] of Object.entries(DATA_SOURCES)) {
         const fileUrl = chrome.runtime.getURL(source.path);
-        console.log("-------------");
-        console.log(key);
-        console.log(source);
-        console.log(fileUrl);
-        console.log("-------------");
-        const res = await fetch(fileUrl);
+
+		const res = await fetch(fileUrl);
         const data = await res.json();
 
         dataSources[key] = new Set(data.map(p => p.profileUri));
@@ -64,7 +60,7 @@ function loadEnabledSources() {
 }
 
 // ===============================
-// INITIAL SCAN
+// HIGHLIGHT DIFFERENT INTERACTIONS
 // ===============================
 
 // Function to highlight matching elements
@@ -116,13 +112,6 @@ function highlightComments(root = document) {
          }
     }
     });
-}
-
-function isProfileHighlighted(profileIdentifier) {
-    return Object.keys(dataSources).some(key =>
-        enabledSources[key] &&
-        dataSources[key]?.has(profileIdentifier)
-    );
 }
 
 function highlightFollowers(root = document){
@@ -222,6 +211,13 @@ function highlightReactions(root = document){
     );
 }
 
+function isProfileHighlighted(profileIdentifier) {
+    return Object.keys(dataSources).some(key =>
+        enabledSources[key] &&
+        dataSources[key]?.has(profileIdentifier)
+    );
+}
+
 // ===============================
 // XPATH HELPER
 // ===============================
@@ -259,6 +255,9 @@ const observer = new MutationObserver(mutations => {
     });
 });
 
+// ===============================
+// CLEAR HIGHLIGHTS
+// ===============================
 function clearHighlights() {
     document.querySelectorAll('.comment-highlighted').forEach(el => {
         el.style = "";
