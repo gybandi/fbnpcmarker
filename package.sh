@@ -1,13 +1,20 @@
 #!/bin/bash
 
-# Files and directory to compress
-DIR_TO_ZIP="assets"
-FILES_TO_ZIP=("manifest.json")
+if [ -z "$1" ] 
+then
+  echo "Usage: ./package.sh <version>"
+  exit 0
+fi
+
+SRC_DIR="src"
 OUTPUT_ZIP="build/fbnpcmarker-$1.zip"
 
-# Create dir
+# Create build dir
 mkdir -p build
-# Create the zip archive
-zip -r "$OUTPUT_ZIP" "$DIR_TO_ZIP" "${FILES_TO_ZIP[@]}"
 
-echo "Created $OUTPUT_ZIP containing $DIR_TO_ZIP and ${FILES_TO_ZIP[*]}"
+# Zip contents of src (not the folder itself)
+cd "$SRC_DIR" || exit 1
+zip -r "../$OUTPUT_ZIP" ./*
+cd - >/dev/null
+
+echo "Created $OUTPUT_ZIP containing contents of $SRC_DIR"
