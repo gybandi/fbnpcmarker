@@ -2,7 +2,7 @@
 set -e
 
 VERSION=$1
-FILE="manifest.json"
+FILE="src/manifest.json"
 
 if [ -z "$VERSION" ]; then
   echo "Usage: $0 <version>"
