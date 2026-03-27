@@ -17,12 +17,15 @@
         "https://www.facebook.com/"
       ],
       "js": [
-        "sources.js" ,"content.js"
+        "sources.js",
+        "content.js"
       ],
       "run_at": "document_idle"
     }
   ],
-  "permissions": ["storage"],
+  "permissions": [
+    "storage"
+  ],
   "web_accessible_resources": [
     {
       "resources": [
