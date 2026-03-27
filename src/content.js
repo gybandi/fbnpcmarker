@@ -69,9 +69,8 @@ function loadEnabledSources() {
 
 // Function to highlight matching elements
 function highlightComments(root = document) {
-    const commentElements = document.querySelectorAll('[aria-label*="Comment by"]:last-child');
-    const replyElements = document.querySelectorAll('[aria-label*="Reply by"]:last-child');
-    const toHighlight = [...commentElements, ...replyElements];
+    const commentElements = document.querySelectorAll('div[role=article]:last-child');
+    const toHighlight = [...commentElements];
 
     toHighlight.forEach(el => {
         const profileLink = el.querySelector('a'); // Assuming the profile link is in an <a> tag
