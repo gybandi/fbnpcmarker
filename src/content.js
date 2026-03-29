@@ -40,11 +40,6 @@ let highlightedProfiles = new Set();
 async function loadProfiles() {
     for (const [key, source] of Object.entries(DATA_SOURCES)) {
         const fileUrl = chrome.runtime.getURL(source.path);
-        console.log("-------------");
-        console.log(key);
-        console.log(source);
-        console.log(fileUrl);
-        console.log("-------------");
         const res = await fetch(fileUrl);
         const data = await res.json();
 
