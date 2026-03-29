@@ -1,5 +1,5 @@
 # Facebook NPC Marker
-Chrome plugin that marks identified troll profiles' activity on Facebook.
+Chromium and Firefox plugin that marks identified troll profiles' activity on Facebook.
 
 # Screenshots
 Comments marking
@@ -36,4 +36,5 @@ Here, the unpacked folder with the content.js and manifest.json must be selected
 
 # Known issues
 
-Comment hightlighting only works in Facebook's "English" language settings. This was fixed in version 0.5
+- Comment hightlighting only works in Facebook's "English" language settings. This was fixed in version 0.5
+- Highlighting on Facebook pages with vanity URL was not working. Fixed in version 0.6
