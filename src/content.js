@@ -125,7 +125,7 @@ function isProfileHighlighted(profileIdentifier) {
 }
 
 function highlightFollowers(root = document){
-    const followerElements = document.querySelectorAll('div:has(a[href$="/followers"]) + div + div:has(a[href*="facebook.com/"][tabindex="0"]) > div');
+    const followerElements = document.querySelectorAll('div:has(a[href$="followers"]) + div + div:has(a[href*="facebook.com/"][tabindex="0"]) > div');
 
    followerElements.forEach(el => {
         const profileLink = el.querySelector('a'); // Assuming the profile link is in an <a> tag
