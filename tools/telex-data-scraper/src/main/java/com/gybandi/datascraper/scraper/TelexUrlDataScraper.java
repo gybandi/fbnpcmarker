@@ -18,7 +18,8 @@ import java.util.Set;
 public class TelexUrlDataScraper implements DataScraper {
     private static final String[] TELEX_DATASOURCE_URLS = {
             "https://telex.hu/techtud/2026/03/09/mutatjuk-a-fideszes-kamuprofil-halozat-mind-az-1198-tagjat",
-            "https://telex.hu/techtud/2026/03/19/mutatjuk-a-fideszes-politikusok-marcius-15-i-ukran-zaszlos-posztjait-lajkokkal-kihangosito-1954-kamuprofilt"
+            "https://telex.hu/techtud/2026/03/19/mutatjuk-a-fideszes-politikusok-marcius-15-i-ukran-zaszlos-posztjait-lajkokkal-kihangosito-1954-kamuprofilt",
+            "https://telex.hu/techtud/2026/03/31/mutatjuk-a-tiszas-politikusok-oldalainal-feltunt-280-trollprofilt"
     };
     private static final String FACEBOOK_URL_BASE = "https://www.facebook.com/profile.php?id=";
     private static final Logger LOGGER = LoggerFactory.getLogger(TelexUrlDataScraper.class);

@@ -58,7 +58,7 @@ class TelexDataUrlScraperTest {
                 );
 
         // verify both URLs were called
-        verify(jsoupFetcher, times(2)).fetchDocument(anyString());
+        verify(jsoupFetcher, times(3)).fetchDocument(anyString());
     }
 
     @Test
@@ -73,6 +73,6 @@ class TelexDataUrlScraperTest {
         // then
         assertThat(result).isEmpty();
 
-        verify(jsoupFetcher, times(2)).fetchDocument(anyString());
+        verify(jsoupFetcher, times(3)).fetchDocument(anyString());
     }
 }
