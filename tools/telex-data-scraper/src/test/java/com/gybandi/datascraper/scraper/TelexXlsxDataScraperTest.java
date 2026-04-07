@@ -1,5 +1,6 @@
 package com.gybandi.datascraper.scraper;
 
+import com.gybandi.datascraper.properties.XlsxScraperProperties;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -14,7 +15,9 @@ class TelexXlsxDataScraperTest {
     void shouldExtractFacebookIdsFromXlsx() {
         // GIVEN
         Resource resource = new ClassPathResource("testinput.xlsx");
-        TelexXlsxDataScraper scraper = new TelexXlsxDataScraper(resource);
+        XlsxScraperProperties xlsxScraperProperties = new XlsxScraperProperties();
+        xlsxScraperProperties.setFiles(List.of(resource));
+        TelexXlsxDataScraper scraper = new TelexXlsxDataScraper(xlsxScraperProperties);
 
         // WHEN
         List<String> result = scraper.scrapeData();
