@@ -27,6 +27,10 @@ The plugin can be installed in two ways:
 
 Easiest way to install is to use Chrome's Web Store, located [here](https://chromewebstore.google.com/detail/facebook-npc-marker/fekdebmoeljibibofalgkfghmbjipnif).  The newest version of the application might be published later here, due to the lengthy review process.
 
+## Install from Firefox Add-ons
+
+The project is also available as a Firefox Addon, which can be found [here](https://addons.mozilla.org/hu/firefox/addon/facebook-npc-marker/). 
+
 ## Install manually
 
 Alternatively, you can install the latest version by downloading the zip file in releases, unpacking it and loading the unpacked plugin' src folder while the developer mode is enabled in your Chrome's extension page.
